@@ -429,7 +429,8 @@ class local_ldap extends auth_plugin_ldap {
         // Remove all LDAP users unknown to Moodle.
         foreach ($members as $member) {
             $params = array (
-                'username' => $member
+                'username' => $member,
+                'mnethostid' => $CFG->mnet_localhost_id
             );
             if ($user = $DB->get_record('user', $params, 'id,username')) {
                 $ret[$user->id] = $user->username;
@@ -527,7 +528,8 @@ class local_ldap extends auth_plugin_ldap {
         // Remove all matching LDAP users unkown to Moodle.
         foreach ($matchings as $member) {
             $params = array (
-                'username' => $member
+                'username' => $member,
+                'mnethostid' => $CFG->mnet_localhost_id
             );
             if ($user = $DB->get_record('user', $params, 'id,username')) {
                 $ret[$user->id] = $user->username;
